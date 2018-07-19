@@ -10,7 +10,7 @@
   },
   "version": "0.1",
   "frameworks": "arduino",
-  "platforms": "esp8266",
+  "platforms": ["esp8266", "esp32"],
   "dependencies": [{ "name": "NeoPixelBus"}]
 }
 
