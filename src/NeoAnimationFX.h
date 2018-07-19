@@ -339,7 +339,7 @@ template<typename T_PIXEL_METHOD> class NeoAnimationFX {
         if(now > SEGMENT_RUNTIME.next_time || _triggered) {
           doShow = true;
           uint16_t delay = (this->*_mode[SEGMENT.mode])();
-          SEGMENT_RUNTIME.next_time = now + max((int)delay, SPEED_MIN);
+          SEGMENT_RUNTIME.next_time = now + std::max((int)delay, SPEED_MIN);
           SEGMENT_RUNTIME.counter_mode_call++;
         }
       }
@@ -594,7 +594,7 @@ template<typename T_PIXEL_METHOD> class NeoAnimationFX {
       r = random(256);
       x = abs(pos - r);
       y = 255 - x;
-      d = min(x, y);
+      d = std::min(x, y);
     }
 
     return r;
@@ -915,7 +915,7 @@ template<typename T_PIXEL_METHOD> class NeoAnimationFX {
   uint16_t mode_fade(void) {
     int lum = SEGMENT_RUNTIME.counter_mode_step - 31;
     lum = 63 - (abs(lum) * 2);
-    lum = map(lum, 0, 64, min(25, (int)_brightness), _brightness);
+    lum = map(lum, 0, 64, std::min(25, (int)_brightness), _brightness);
 
     //uint8_t w = (SEGMENT.colors[0] >> 24 & 0xFF) * lum / _brightness; // modify RGBW colors with brightness info
     uint8_t r = (SEGMENT.colors[0].R) * lum / _brightness;
