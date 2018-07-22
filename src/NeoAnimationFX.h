@@ -1031,8 +1031,8 @@ template<typename T_PIXEL_METHOD> class NeoAnimationFX {
       for(uint16_t i=SEGMENT.start; i <= SEGMENT.stop; i++) {
         this->setPixelColor(i, BLACK);
       }
-      uint16_t min_leds = max(1, SEGMENT_LENGTH / 5); // make sure, at least one LED is on
-      uint16_t max_leds = max(1, SEGMENT_LENGTH / 2); // make sure, at least one LED is on
+      uint16_t min_leds = std::max(1, SEGMENT_LENGTH / 5); // make sure, at least one LED is on
+      uint16_t max_leds = std::max(1, SEGMENT_LENGTH / 2); // make sure, at least one LED is on
       SEGMENT_RUNTIME.counter_mode_step = random(min_leds, max_leds);
     }
 
@@ -1139,7 +1139,7 @@ template<typename T_PIXEL_METHOD> class NeoAnimationFX {
     }
 
     if(random(5) < 2) {
-      for(uint16_t i=0; i < max(1, SEGMENT_LENGTH/3); i++) {
+      for(uint16_t i=0; i < std::max(1, SEGMENT_LENGTH/3); i++) {
         this->setPixelColor(SEGMENT.start + random(SEGMENT_LENGTH), rgbcolor_white);
       }
       return 20;
@@ -1508,13 +1508,13 @@ template<typename T_PIXEL_METHOD> class NeoAnimationFX {
     }
 
     if(!_triggered) {
-      for(uint16_t i=0; i<max(1, SEGMENT_LENGTH/20); i++) {
+      for(uint16_t i=0; i<std::max(1, SEGMENT_LENGTH/20); i++) {
         if(random(10) == 0) {
 		  this->setPixelColor(SEGMENT.start + random(SEGMENT_LENGTH), color);
         }
       }
     } else {
-      for(uint16_t i=0; i<max(1, SEGMENT_LENGTH/10); i++) {
+      for(uint16_t i=0; i<std::max(1, SEGMENT_LENGTH/10); i++) {
 		this->setPixelColor(SEGMENT.start + random(SEGMENT_LENGTH), color);
       }
     }
@@ -1541,10 +1541,10 @@ template<typename T_PIXEL_METHOD> class NeoAnimationFX {
   * Fire flicker function
   */
   uint16_t fire_flicker(int rev_intensity) {
-    byte lum = max(SEGMENT.colors[0].R, max(SEGMENT.colors[0].G, SEGMENT.colors[0].B)) / rev_intensity;
+    byte lum = std::max(SEGMENT.colors[0].R, std::max(SEGMENT.colors[0].G, SEGMENT.colors[0].B)) / rev_intensity;
     for(uint16_t i=SEGMENT.start; i <= SEGMENT.stop; i++) {
       int flicker = random(0, lum);
-      this->setPixelColor(i, max(SEGMENT.colors[0].R - flicker, 0), max(SEGMENT.colors[0].G - flicker, 0), max(SEGMENT.colors[0].B - flicker, 0));
+      this->setPixelColor(i, std::max(SEGMENT.colors[0].R - flicker, 0), std::max(SEGMENT.colors[0].G - flicker, 0), std::max(SEGMENT.colors[0].B - flicker, 0));
     }
     return (SEGMENT.speed / SEGMENT_LENGTH);
   }
